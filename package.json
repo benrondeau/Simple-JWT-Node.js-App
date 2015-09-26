@@ -4,17 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js & npm run transpile",
+    "start": "node server.js",
     "transpile": "babel ./server-es6.js --out-file ./server.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ben Rondeau",
   "license": "ISC",
   "dependencies": {
+    "babel": "^5.8.23",
     "body-parser": "^1.14.0",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.0.5",
-    "morgan": "^1.6.1",
-    "nodemon": "^1.7.1"
+    "morgan": "^1.6.1"
   }
 }
