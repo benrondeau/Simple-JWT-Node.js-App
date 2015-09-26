@@ -9,6 +9,5 @@ Basic Node.js server that issues JSON Web Tokens (JWT) and validates them before
 ### Get Started
 - Download Repo
 - cd into project directory and `npm install`
-- `npm run babel` to start transpile server.es6 to server.js
-- Open another terminal window and run server.js with `npm start`
+- `npm start`
 - Open [Postman](https://www.getpostman.com/) and tool around with app
