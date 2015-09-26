@@ -18,27 +18,10 @@ app.use(bodyParser.json());
 
 //Routing
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  res.send('Hello World!!!!');
 });
 
 app.post('/authenticate', function (req, res) {
-//Server
-var port = process.env.PORT || 3000;
-app.listen(port);
-console.log('Magic happens at http://localhost:' + port);
-
-
-
-
-/*********************************
-Step 2 - Getting a JWT
-*********************************/
-
-const tokenSecret = 'super-secret-and-complicated-string';
-const jwt = require('jsonwebtoken'); // all JWT functions
-
-
-app.post('/authenticate', (req, res)=> {
 
   if (req.body.username === 'user' && req.body.password === '12345') {
 
@@ -58,17 +41,21 @@ app.post('/authenticate', (req, res)=> {
   }
 });
 
+//Server
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log('Magic happens at http://localhost:' + port);
 
+/*********************************
+Step 2 - Getting a JWT
+*********************************/
 
-
+var tokenSecret = 'apann49fn8apwounq9384fnpawiuefn';
+var protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
 
 /*********************************
 Step 3 - Create Protected Routes and Verify JWT
 *********************************/
-
-// Protected routes
-var tokenSecret = 'apann49fn8apwounq9384fnpawiuefn';
-const protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
 
 protectedRoutes.use(function (req, res, next) {
   // check header or url parameters or post parameters for token
@@ -89,9 +76,6 @@ protectedRoutes.use(function (req, res, next) {
     return res.status(401).send('Access Denied. Invalid Credentials');
   }
 });
-
-// apply the routes to our application with the prefix
-app.use('/protected', protectedRoutes);
 
 // These routes are RELATIVE to /protected
 protectedRoutes.get('/', function (req, res) {
