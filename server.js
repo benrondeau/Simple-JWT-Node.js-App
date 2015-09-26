@@ -1,6 +1,9 @@
+/*********************************
+Step 1 - Basic App Setup
+*********************************/
+
 //Dependencies
 const express = require('express'); //middleware
-const jwt = require('jsonwebtoken'); // all JWT functions
 const morgan = require('morgan'); //log server functions to console
 const bodyParser  = require('body-parser'); //get values from HTTP requests
 
@@ -14,6 +17,24 @@ app.use(bodyParser.json());
 app.get('/', (req, res)=> {
   res.send('Hello World!');
 });
+
+//Server
+var port = process.env.PORT || 3000;
+app.listen(port);
+console.log('Magic happens at http://localhost:' + port);
+
+
+
+
+
+
+/*********************************
+Step 2 - Getting a JWT
+*********************************/
+
+const tokenSecret = 'super-secret-and-complicated-string';
+const jwt = require('jsonwebtoken'); // all JWT functions
+
 
 app.post('/authenticate', (req, res)=> {
 
@@ -37,13 +58,15 @@ app.post('/authenticate', (req, res)=> {
 
 });
 
-//Server
-var port = process.env.PORT || 3000;
-app.listen(port);
-console.log('Magic happens at http://localhost:' + port);
+
+
+
+
+/*********************************
+Step 3 - Create Protected Routes and Verify JWT
+*********************************/
 
 // Protected routes
-const tokenSecret = 'apann49fn8apwounq9384fnpawiuefn';
 const protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
 
 protectedRoutes.use( (req, res, next)=> {
@@ -67,11 +90,11 @@ protectedRoutes.use( (req, res, next)=> {
   }
 });
 
+// apply the routes to our application with the prefix
+app.use('/protected', protectedRoutes);
+
 // These routes are RELATIVE to /protected
 protectedRoutes.get('/', (req, res)=>{
 	res.send('Welcome to the protected route! You have a valid JWT');
 });
-
-// apply the routes to our application with the prefix /api
-app.use('/protected', protectedRoutes);
 
