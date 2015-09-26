@@ -1,3 +1,7 @@
+/*********************************
+Step 1 - Basic App Setup
+*********************************/
+
 //Dependencies
 const express = require('express'); //middleware
 const jwt = require('jsonwebtoken'); // all JWT functions
@@ -42,9 +46,16 @@ var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Magic happens at http://localhost:' + port);
 
-// Protected routes
+/*********************************
+Step 2 - Getting a JWT
+*********************************/
+
 const tokenSecret = 'apann49fn8apwounq9384fnpawiuefn';
 const protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
+
+/*********************************
+Step 3 - Create Protected Routes and Verify JWT
+*********************************/
 
 protectedRoutes.use( (req, res, next)=> {
   // check header or url parameters or post parameters for token
