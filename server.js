@@ -3,18 +3,12 @@ Step 1 - Basic App Setup
 *********************************/
 
 //Dependencies
-<<<<<<< HEAD
 'use strict';
 
 var express = require('express'); //middleware
 var jwt = require('jsonwebtoken'); // all JWT functions
 var morgan = require('morgan'); //log server functions to console
 var bodyParser = require('body-parser'); //get values from HTTP requests
-=======
-const express = require('express'); //middleware
-const morgan = require('morgan'); //log server functions to console
-const bodyParser  = require('body-parser'); //get values from HTTP requests
->>>>>>> master
 
 //App settings
 var app = express();
@@ -27,15 +21,11 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-<<<<<<< HEAD
 app.post('/authenticate', function (req, res) {
-=======
 //Server
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Magic happens at http://localhost:' + port);
-
-
 
 
 
@@ -49,9 +39,6 @@ const jwt = require('jsonwebtoken'); // all JWT functions
 
 
 app.post('/authenticate', (req, res)=> {
-
-	if(req.body.username === 'user' && req.body.password === '12345'){
->>>>>>> master
 
   if (req.body.username === 'user' && req.body.password === '12345') {
 
@@ -80,12 +67,8 @@ Step 3 - Create Protected Routes and Verify JWT
 *********************************/
 
 // Protected routes
-<<<<<<< HEAD
 var tokenSecret = 'apann49fn8apwounq9384fnpawiuefn';
-var protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
-=======
 const protectedRoutes = express.Router(); //middleware for protected routes - an instance of an express router inside of an express app.
->>>>>>> master
 
 protectedRoutes.use(function (req, res, next) {
   // check header or url parameters or post parameters for token
@@ -115,8 +98,5 @@ protectedRoutes.get('/', function (req, res) {
   res.send('Welcome to the protected route! You have a valid JWT');
 });
 
-<<<<<<< HEAD
 // apply the routes to our application with the prefix /api
 app.use('/protected', protectedRoutes);
-=======
->>>>>>> master
