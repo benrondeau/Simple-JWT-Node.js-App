@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 //Routing
 app.get('/', (req, res)=> {
-  res.send('Hello World!');
+  res.send('Hello World!!!!');
 });
 
 app.post('/authenticate', (req, res)=> {
@@ -29,7 +29,7 @@ app.post('/authenticate', (req, res)=> {
 	      success: true,
 	      message: 'Enjoy your token!',
 	      token: token
-	    }); 
+	    });
 	}
 	else{
 		res.status(401).send('Wrong credentials!');
@@ -52,12 +52,12 @@ protectedRoutes.use( (req, res, next)=> {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    jwt.verify(token, tokenSecret, (err, decoded)=> {      
+    jwt.verify(token, tokenSecret, (err, decoded)=> {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
+        req.decoded = decoded;
         next();
       }
     });
@@ -74,4 +74,3 @@ protectedRoutes.get('/', (req, res)=>{
 
 // apply the routes to our application with the prefix /api
 app.use('/protected', protectedRoutes);
-
